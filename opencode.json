@@ -1,6 +1,12 @@
 {
   "$schema": "https://opencode.ai/config.json",
   "autoupdate": false,
+   
+  "pipeline": [
+    "prompt-optimizer",
+    "auto"
+  ],
+  
   "permission": {
     "skill": {
       "*": "allow",
