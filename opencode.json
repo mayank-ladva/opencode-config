@@ -88,6 +88,5 @@
         }
       }
     }
-  },
-  "default_agent": "OpenAgent"
+  }
 }
