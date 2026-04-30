@@ -1,85 +1,231 @@
-# OpenCode Config
+# OpenCode AI Configuration Pack
 
-Personal OpenCode configuration bundle with custom agents, commands, skills, and context files.
+Control your AI patterns. Get repeatable results.
 
-## What is included
+This repository is a production-oriented OpenCode configuration that applies the OpenAgents Control workflow: context-aware planning, approval gates, modular delegation, and consistent implementation standards.
 
-- `agent/`, `agents/`: agent and subagent definitions
-- `command/`, `commands/`: reusable command prompts/workflows
-- `context/`: project and core context knowledge
-- `skills/`: custom OpenCode skills
-- `tool/`: local tool integrations
-- `opencode.json`: main OpenCode config
+If you’ve ever had AI generate code that _works_ but doesn’t match your architecture, naming, or quality bar, this config is built to solve exactly that.
 
-## Custom agents
+---
 
-This config includes role-focused subagents to speed up common engineering tasks:
+## Why use this config
 
-- `code-reviewer`: security, performance, and maintainability reviews (read-only)
-- `researcher`: compares libraries and technical approaches (read-only)
-- `refactorer`: safe structural refactors with test-first expectations
-- `explainer`: documentation and code explanation support
-- `implementer`: feature delivery workflow (research -> plan -> implement -> test)
+### 1) Your patterns become default behavior
 
-Agent definitions live in both:
+Agents are designed to load project context before execution, so generated output follows your conventions instead of generic defaults.
 
-- `agents/` (top-level aliases/entrypoints)
-- `agent/subagents/` (category-organized subagent prompts)
+### 2) Approval-first workflow
 
-Default agent is configured in `opencode.json` as `OpenAgent`.
+Plans are proposed before execution. You stay in control of edits, commands, and implementation scope.
 
-## Skills
+### 3) MVI-style context loading
 
-Current bundled skill:
+Minimal Viable Information (MVI) keeps context focused and efficient: load what is needed, avoid unnecessary prompt bloat.
 
-- `skills/feature-development/SKILL.md`: end-to-end feature workflow guidance
+### 4) Team consistency by design
 
-Use skills when tasks benefit from structured process and standards.
+The context and command system makes it easier for teams to produce consistent code and documentation across contributors.
 
-## Commands and context
+### 5) Live external docs when needed
 
-- `command/` and `commands/` include reusable slash-command prompts
-- `context/core/` contains shared standards, workflows, and system guidance
-- `context/project-intelligence/` stores project-specific architecture and decisions
+External library lookups are supported via Context7 workflows, helping avoid outdated patterns.
 
-If you plan to collaborate, keep project-specific context versioned in this repo and avoid storing secrets in context files.
+---
 
-## Requirements
+## What you get
 
-- OpenCode CLI
-- Bun (if you use local plugin tooling)
+- **Core agents** for general execution and coding workflows
+- **Specialized subagents** for planning, implementation, testing, review, and documentation
+- **Command system** for structured, repeatable workflows
+- **Context system** for standards, workflows, and project intelligence
+- **Skill library** across frontend, backend, infra, security, testing, and documentation
+- **Runtime config** through `opencode.json`
+- **MCP servers** for live docs (Context7) and GitHub integration
 
-## Setup
+---
 
-Clone this repo into your OpenCode config directory:
+## How this helps in practice
 
-```bash
-git clone https://github.com/mayank-ladva/opencode-config.git ~/.config/opencode
-```
+With a typical generic setup:
 
-If you use Context7 MCP, set your API key:
+- AI generates code fast
+- You spend time reshaping it to fit project standards
 
-```bash
-export CONTEXT7_API_KEY="your_api_key"
-```
+With this config:
 
-Then restart your OpenCode session.
+- Agents discover relevant context first
+- They propose an approach with explicit checkpoints
+- They execute incrementally with validation and approval
 
-## Notes
+Result: less rework, cleaner diffs, more predictable output.
 
-- `opencode.json` references `CONTEXT7_API_KEY` via environment variable.
-- Do not commit secrets or private tokens into this repo.
+---
 
-## Update workflow
+## Installation (Linux)
+
+Copy this repository into your global OpenCode config path (excluding git internals):
 
 ```bash
-git add .
-git commit -m "update opencode config"
-git push
+mkdir -p ~/.config/opencode
+rsync -av --exclude '.git' ./ ~/.config/opencode/
 ```
 
-## Suggested maintenance
+That’s it. OpenCode will load this config from `~/.config/opencode`.
 
-- Review new agent/skill prompts before commit for correctness
-- Keep `opencode.json` permissions minimal (least privilege)
-- Validate no secrets are introduced before pushing
+### Environment setup
+
+Copy `.env.example` to `.env` and fill in your API keys:
+
+```bash
+cp .env.example .env
+# Edit .env with your keys
+```
+
+Available variables:
+
+- `CONTEXT7_API_KEY` — for Context7 live docs (get from https://context7.com)
+- GitHub token — stored in `~/.config/opencode/.secrets/github-key`
+
+The `.env` file is gitignored. Never commit secrets.
+
+### Platform support
+
+- ✅ Tested on **Linux**
+- ✅ Tested on **Windows via WSL**
+- ⚠️ Other environments may work, but are not officially tested yet
+
+---
+
+## Configuration resolution (important)
+
+OpenCode configuration is loaded by proximity:
+
+1. Project-local (`.opencode/`)
+2. Parent directories
+3. Global (`~/.config/opencode/`)
+
+**Practical recommendation**:
+
+- Use **project-local** for shared team behavior
+- Use **global** for your personal defaults
+
+---
+
+## MCP Servers
+
+This config includes MCP (Model Context Protocol) connections for enhanced tooling and workflows.
+
+### Context7
+
+Context7 provides live documentation lookups so agents can fetch up-to-date library docs without relying on training data.
+
+- Used by the `Context7` skill and `@researcher` agent
+- Enables real-time library docs, code examples, and API references
+- Configured in `opencode.json` under the `context7` key
+- API key set via `CONTEXT7_API_KEY` in `.env`
+
+### GitHub MCP
+
+GitHub MCP enables AI agents to interact with GitHub directly—creating issues, PRs, managing repos, and more without leaving the workflow.
+
+- Used for GitHub-aware workflows (issue creation, PR management, repo operations)
+- Connects to GitHub Copilot MCP endpoint
+- Requires a GitHub personal access token
+
+#### Secret handling
+
+- Store the GitHub token in `~/.config/opencode/.secrets/github-key`
+- The `.secrets/` directory is ignored by git
+- Do not commit credentials into the repository
+- Token is referenced in `opencode.json` via `{file:~/.config/opencode/.secrets/github-key}`
+
+#### Notes
+
+- This setup uses a locally stored token for auth
+- Upstream GitHub MCP also supports OAuth-based setups if you want to switch later
+
+---
+
+## Example prompts
+
+```text
+@implementer build this endpoint using our API conventions
+@code-reviewer review this diff for security and maintainability risks
+@researcher compare library options for this feature
+@explainer summarize this module and generate docs
+```
+
+---
+
+## Core workflow model
+
+This config emphasizes a structured lifecycle:
+
+1. **Discover** context and constraints
+2. **Propose** a plan
+3. **Approve** before execution
+4. **Implement** incrementally
+5. **Validate** and hand off
+
+This is intentionally optimized for reliability and maintainability over "fire-and-forget" automation.
+
+---
+
+## Repo structure
+
+```text
+agent/          # Core agents and specialized subagents
+command/        # Slash commands and workflow entrypoints
+config/         # Metadata and config support files
+context/        # Standards, workflows, project intelligence
+skills/         # Reusable capability modules
+opencode.json   # Runtime permissions/MCP configuration
+README.md
+```
+
+---
+
+## Customization guide
+
+You can safely adapt this config to your team:
+
+- Update context files in `context/project-intelligence/`
+- Tune agent behavior in `agent/`
+- Add workflow commands under `command/`
+- Extend capabilities through `skills/`
+
+Tip: keep edits incremental and tested. If behavior changes significantly, document it in README or context notes.
+
+---
+
+## FAQ
+
+### Will this replace my existing config?
+
+If you copy these files into an existing config location, overlapping files will be replaced.
+
+### Should I use local or global config?
+
+Use local for team/project consistency. Use global for personal defaults across repositories.
+
+### Do I need every skill enabled?
+
+No. You can keep only the skills and commands your team actively uses.
+
+### Can I still use upstream OAC resources?
+
+Yes. This repo is compatible with OAC workflows and patterns and can be evolved alongside upstream guidance.
+
+---
+
+## Attribution
+
+Powered by [OpenAgents Control (OAC)](https://github.com/darrenhinde/OpenAgentsControl) by Darren Hinde.
+
+---
+
+## Related resources
+
+- [OpenAgents Control Repository](https://github.com/darrenhinde/OpenAgentsControl)
+- [OpenCode Documentation](https://opencode.ai/docs)
+- [AGENTS.md](./AGENTS.md)

@@ -160,6 +160,6 @@ Not listed? ExternalScout can still fetch from official docs.
 
 ## Related
 
-- `../../openagents-repo/guides/external-libraries-workflow.md` - Core workflow
+- `external-libraries-workflow.md` - Core workflow
 - `external-libraries-scenarios.md` - Common scenarios
 - `.opencode/agent/subagents/core/externalscout.md` - ExternalScout agent

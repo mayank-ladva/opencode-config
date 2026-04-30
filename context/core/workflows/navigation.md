@@ -14,7 +14,7 @@
 | `task-delegation-basics.md` | Core delegation workflow | ⭐⭐⭐⭐ | Using task tool |
 | `task-delegation-specialists.md` | When to delegate to whom | ⭐⭐⭐⭐ | Choosing specialist |
 | `task-delegation-caching.md` | Context caching | ⭐⭐⭐ | Repeated tasks |
-| `../../openagents-repo/guides/external-libraries-workflow.md` | External library process | ⭐⭐⭐⭐ | External packages |
+| `external-libraries-workflow.md` | External library process | ⭐⭐⭐⭐ | External packages |
 | `external-libraries-scenarios.md` | Common scenarios | ⭐⭐⭐ | Examples needed |
 | `external-libraries-faq.md` | Troubleshooting | ⭐⭐⭐ | Errors/questions |
 | `feature-breakdown.md` | Breaking down features | ⭐⭐⭐⭐ | 4+ files, complex tasks |
@@ -42,7 +42,7 @@
 2. Load `task-delegation-specialists.md` (when choosing agent)
 
 **For external libraries**:
-1. Load `../../openagents-repo/guides/external-libraries-workflow.md` (high)
+1. Load `external-libraries-workflow.md` (high)
 2. Reference `external-libraries-scenarios.md` for examples
 
 **For complex features**:

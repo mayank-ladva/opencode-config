@@ -1,8 +1,5 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "autoupdate": false,
-   
-  
   "permission": {
     "skill": {
       "*": "allow",
@@ -23,9 +20,9 @@
   },
   "agent": {
     "code-reviewer": {
-      "description": "Code review, security, and quality assurance agent",
+      "description": "Reviews code for best practices and potential issues",
       "mode": "subagent",
-      "prompt":"You are a code reviewer. Focus on security, performance, and maintainability. Use skills as needed for detailed reviews of specific areas.",
+      "prompt": "You are a code reviewer. Focus on security, performance, and maintainability. Use skills as needed for detailed reviews of specific areas.",
       "tools": {
         "read": true,
         "grep": true,
@@ -73,7 +70,7 @@
     "implementer": {
       "description": "Implements features following development best practices",
       "mode": "subagent",
-      "prompt": "You are a feature implementation specialist. Your job is to implement features from start to finish. Follow the feature development workflow: research \u2192 plan \u2192 implement \u2192 test. Use @skill for language-specific patterns. Ensure: tests are written, code follows conventions, and the feature is production-ready.",
+      "prompt": "You are a feature implementation specialist. Your job is to implement features from start to finish. Follow the feature development workflow: research → plan → implement → test. Use @skill for language-specific patterns. Ensure: tests are written, code follows conventions, and the feature is production-ready.",
       "tools": {
         "read": true,
         "write": true,
@@ -88,5 +85,8 @@
         }
       }
     }
-  }
+  },
+  "plugin": [
+    "oh-my-opencode@latest"
+  ]
 }

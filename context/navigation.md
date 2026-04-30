@@ -14,8 +14,10 @@
 ├── openagents-repo/        # OpenAgents Control repository work
 ├── development/            # Software development (all stacks)
 ├── ui/                     # Visual design & UX
-├── project-intelligence/   # Repository-specific technical context
-└── project/                # Project-local notes and context
+├── content-creation/       # Content creation (all formats)
+├── data/                   # Data engineering & analytics
+├── product/                # Product management
+└── learning/               # Educational content
 ```
 
 ---
@@ -41,5 +43,7 @@
 **openagents-repo/** - Repository-specific → `openagents-repo/navigation.md`
 **development/** - All development → `development/navigation.md`
 **ui/** - Design & UX → `ui/navigation.md`
-**project-intelligence/** - Project technical domain → `project-intelligence/navigation.md`
-**project/** - Project context → `project/project-context.md`
+**content-creation/** - Content creation (all formats) → `content-creation/navigation.md`
+**data/** - Data engineering → `data/navigation.md`
+**product/** - Product management → `product/navigation.md`
+**learning/** - Educational → `learning/navigation.md`

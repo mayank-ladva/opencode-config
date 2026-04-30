@@ -126,5 +126,5 @@ task(
 
 ## Related
 
-- `../../openagents-repo/guides/external-libraries-workflow.md` - Core workflow
+- `external-libraries-workflow.md` - Core workflow
 - `external-libraries-faq.md` - Troubleshooting FAQ

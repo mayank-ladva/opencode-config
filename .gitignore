@@ -1,14 +1,26 @@
+# Dependencies
 node_modules/
 
-# Environment files
+# Lock files
+bun.lock
+package-lock.json
+yarn.lock
+
+# Environment variables
 .env
-.env.*
-!.env.example
+.env.local
+.env.*.local
 
-# Logs
-*.log
+# Secrets
+.secrets/
 
-# OS/editor files
+# Editor directories and files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
 .DS_Store
 Thumbs.db
-.vscode/
