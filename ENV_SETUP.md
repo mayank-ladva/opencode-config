@@ -37,7 +37,7 @@ Update the file with your actual API keys:
 
 ```env
 # Context7 MCP Server API Key
-CONTEXT7_API_KEY=ctx7sk-af98b8f2-4b9f-40e6-a6af-8369db18ff03
+CONTEXT7_API_KEY=YOUR CONTEXT7_API_KEY
 ```
 
 **Note:** If you lost your original API key, you can retrieve it from:
